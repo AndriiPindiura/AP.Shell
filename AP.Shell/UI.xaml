@@ -1,0 +1,51 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:AP.Shell"
+        x:Class="AP.Shell.UI"
+        Title="AP Shell" WindowState="Maximized" 
+        Icon="apicon.ico"
+        ShowInTaskbar="False" WindowStyle="None"  
+        AllowsTransparency="True"
+        Topmost="True"
+        Loaded="Window_Loaded"
+        x:Name="UIForm" Closing="UIForm_Closing" KeyDown="UIForm_KeyDown">
+    <Window.Background>
+        <SolidColorBrush Color="Transparent" Opacity="0.5"/>
+        
+    </Window.Background>
+    <Grid x:Name="MG">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition MaxWidth="75" Width="0.1*"/>
+            <ColumnDefinition Width="0.7*" />
+            <ColumnDefinition Width="0.2*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*" />
+            <RowDefinition Height="0.8*" />
+            <RowDefinition Height="0.1*" />
+        </Grid.RowDefinitions>
+
+        <!--<Label x:Name="Username" Grid.Column="1" Content="NaN" />-->
+        <Image Grid.Column="2" Grid.Row="2" MaxWidth="154" MaxHeight="85" Margin="5,5,5,5" Source="pack://application:,,,/Resources/ap2.png" HorizontalAlignment="Right" VerticalAlignment="Bottom" Opacity="1" MouseLeftButtonDown="Image_MouseDown" MouseRightButtonDown="Image_MouseRightButtonDown"/>
+        <local:LoginCtrl Grid.Column="2" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,10,0" Visibility="Hidden" x:Name="loginUC"/>
+        <StackPanel Grid.Column="0" Grid.Row="1" VerticalAlignment="Center">
+            <ListView HorizontalAlignment="Left" MaxWidth="62" Style="{DynamicResource {ComponentResourceKey ResourceId=resIconView, TypeInTargetAssembly={x:Type local:IconView}}}" 
+                      ItemTemplate="{DynamicResource userApps}" SelectionMode="Single"
+                      x:Name="userListView" SelectionChanged="adminListView_SelectionChanged" Background="Transparent"/>
+        </StackPanel>
+        <ListView Grid.Column="1" Style="{DynamicResource {ComponentResourceKey ResourceId=resIconView, TypeInTargetAssembly={x:Type local:IconView}}}" 
+                  ItemTemplate="{DynamicResource adminApps}" SelectionMode="Single"
+                  x:Name="adminListView" SelectionChanged="adminListView_SelectionChanged" Grid.Row="1" Visibility="Hidden">
+            <ListView.Background>
+                <SolidColorBrush Color="White" Opacity="0.25" />
+            </ListView.Background>
+        </ListView>
+        <ListView Grid.Column="1" Grid.Row="2"  VerticalAlignment="Bottom" BorderBrush="Transparent"
+                  Style="{DynamicResource {ComponentResourceKey ResourceId=processIconView, TypeInTargetAssembly={x:Type local:IconView}}}" 
+                      SelectionMode="Single" ItemTemplate="{DynamicResource runningApps}"
+                      x:Name="processListView" SelectionChanged="processListView_SelectionChanged" Background="Transparent">
+        </ListView>
+
+    </Grid>
+</Window>
